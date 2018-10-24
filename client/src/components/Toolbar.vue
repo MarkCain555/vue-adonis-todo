@@ -13,7 +13,7 @@
                 <v-icon class="mr-2">account_box</v-icon>
                 Register
             </v-btn>
-            <v-btn flat v-if="!isLoggedIn">
+            <v-btn flat to="/login" v-if="!isLoggedIn">
                 <v-icon class="mr-2">fingerprint</v-icon>
                 Login
             </v-btn>
@@ -30,18 +30,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
 export default {
-    computed: {
-        ...mapGetters('authentication', [
-            'isLoggedIn',
-        ])
-    },
-    methods: {
-        ...mapActions('authentication', [
-            'logout',
-        ])
-    },
+	computed: {
+		...mapGetters('authentication', ['isLoggedIn']),
+	},
+	methods: {
+		...mapActions('authentication', ['logout']),
+	},
 };
 </script>
 
