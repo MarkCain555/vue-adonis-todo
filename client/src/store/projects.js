@@ -5,6 +5,7 @@ import HTTP from '../http';
 export default {
 	namespaced: true,
 	state: {
+		currentProject: null,
 		projects: [],
 		newProjectTitle: null,
 		setCreateProjectError: null,
@@ -71,6 +72,9 @@ export default {
 	},
 	getters: {},
 	mutations: {
+		setCurrentProject(state, project) {
+			state.currentProject = project;
+		},
 		setNewProjectTitle(state, title) {
 			state.newProjectTitle = title;
 		},

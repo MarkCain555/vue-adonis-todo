@@ -4,7 +4,7 @@
             <EditableRecord :isEditMode="project.isEditMode" :title="project.title" @onInput="setProjectTitle({
                     project,
                     title: $event,
-                })" @onEdit="setEditMode(project)" @onSave="saveProject(project)" @onDelete="deleteProject(project)" />
+                })" @onEdit="setEditMode(project)" @onSave="saveProject(project)" @onDelete="deleteProject(project)" @onClick="projectClicked(project)" />
         </div>
         <CreateRecord placeholder="My project name..." @onInput="setNewProjectTitle" :value="newProjectTitle" @create="createProject" />
     </Panel>
@@ -27,10 +27,15 @@ export default {
 		...mapState('projects', ['newProjectTitle', 'projects']),
 	},
 	methods: {
+		projectClicked(project) {
+			this.setCurrentProject = project;
+			this.fetchTasksForProject(project);
+		},
 		...mapMutations('projects', [
 			'setNewProjectTitle',
 			'setEditMode',
 			'setProjectTitle',
+			'setCurrentProject',
 		]),
 		...mapActions('projects', [
 			'createProject',
@@ -38,6 +43,7 @@ export default {
 			'saveProject',
 			'deleteProject',
 		]),
+		...mapActions('tasks', ['fetchTasksForProject']),
 	},
 };
 </script>
