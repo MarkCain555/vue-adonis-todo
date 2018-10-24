@@ -4,7 +4,11 @@
             <EditableRecord :isEditMode="task.isEditMode" :title="task.description" @onInput="setTaskDescription({
                     task,
                     description: $event,
-                })" @onEdit="setEditMode(task)" @onSave="saveTask(task)" @onDelete="deleteTask(task)" />
+                })" @onEdit="setEditMode(task)" @onSave="saveTask(task)" @onDelete="deleteTask(task)">
+                <v-icon @click="checkClicked(task)">
+                    {{ task.completed ? 'check_box' : 'check_box_outline_blank' }}
+                </v-icon>
+            </EditableRecord>
 
         </div>
         <CreateRecord placeholder="I need to..." @onInput="setNewTaskName" :value="newTaskName" @create="createTask" />
@@ -31,7 +35,12 @@ export default {
 			'setNewTaskName',
 			'setTaskDescription',
 			'setEditMode',
+			'toggleCompleted',
 		]),
+		checkClicked(task) {
+			this.toggleCompleted(task);
+			this.saveTask(task);
+		},
 	},
 };
 </script>

@@ -42,9 +42,7 @@ class TaskController {
     const { id } = params;
     const task = await Task.find(id);
     const project = await task.project().fetch();
-    console.log(project);
-    console.log(task);
-    console.log(user);
+
     AuthorizationService.verifyPermission(project, user);
     await task.merge(request.only(['description', 'completed']));
     task.save();

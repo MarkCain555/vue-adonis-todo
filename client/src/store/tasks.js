@@ -106,5 +106,8 @@ export default {
 		setDeleteTaskError(state, error) {
 			state.setSaveTaskError = error;
 		},
+		toggleCompleted(state, task) {
+			task.completed = !task.completed;
+		},
 	},
 };
